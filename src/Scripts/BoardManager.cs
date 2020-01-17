@@ -7,14 +7,15 @@ public class BoardManager : MonoBehaviour
 {
     /*
     TODO:
+    Fix upper row not couning in column check
     Fix allowing players to place on a filled column. The array won't count it, but the object will still run and they will loose turn.
     Add background image
     Add background music
     Add sound effects (win, start, place chip)
      */
     private int[,] board;
-   // private int WIDTH = 32 + 6 + 23;
-    private int  numColumn, numRow, currentPlayer; //how long is the chip, the distance between slots, center of slot
+    // private int WIDTH = 32 + 6 + 23;
+    private int numColumn, numRow, currentPlayer; //how long is the chip, the distance between slots, center of slot
     public GameObject menuButton, overText, winnerText;
     void Start()
     {
@@ -77,12 +78,12 @@ public class BoardManager : MonoBehaviour
         int count = 0;
         for (int col = 0; col < numColumn; col++)
         {
-            if (count == 4)
-                return true;
             if (board[row, col] == player)
                 count++;
             else
                 count = 0;
+            if (count == 4)
+                return true;
         }
         return false;
     }
@@ -92,12 +93,12 @@ public class BoardManager : MonoBehaviour
         int count = 0;
         for (int row = 0; row < numRow; row++)
         {
-            if (count == 4)
-                return true;
             if (board[row, column] == player)
                 count++;
             else
                 count = 0;
+            if (count == 4)
+                return true;
         }
         return false;
     }
@@ -113,7 +114,7 @@ public class BoardManager : MonoBehaviour
             if (c >= numColumn)
                 break;
             if (board[r, c] == player)
-                count++; 
+                count++;
             else
                 break;
         }
